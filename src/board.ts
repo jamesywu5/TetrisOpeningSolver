@@ -80,6 +80,10 @@ class Board {
         );
     }
 
+    getBoard(): string {
+        return [...this.grid].reverse().map(row => row.map(cell => cell || "0").join(" ")).join("\n");
+    }
+
     checkPlaceable(piece: PieceType, Xposition: number): boolean {
         const width = findPieceWidth(piece);
         return Xposition >= 0 && 10 >= Xposition + width;
@@ -87,7 +91,7 @@ class Board {
 
     findLowestEmptyRow(Xposition: number, piece: PieceType): number {
         const shape = PIECES[piece];
-        for (let y = 0; y < 20; y++) {
+        for (let y = 19; y >= 0; y--) {
             let canPlace = true;
             for (const block of shape) {
                 const boardX = Xposition + block.x;
@@ -115,5 +119,5 @@ class Board {
     }
 }
 
-const board = new Board();
-board.printBoard();
+export { Board };
+export type { PieceType };
