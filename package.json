@@ -4,7 +4,8 @@
   "description": "An attempt to make a React app that allows for users to enter pieces on a tetris board and analyze the probability that the opening bag's order can support the structure.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run --no-file-parallelism --testTimeout=3000 --coverage",
+    "test:watch": "vitest"
   },
   "repository": {
     "type": "git",
@@ -13,13 +14,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/jamesywu5/TetrisOpeningSolver/issues"
   },
   "homepage": "https://github.com/jamesywu5/TetrisOpeningSolver#readme",
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.9",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
   }
 }
