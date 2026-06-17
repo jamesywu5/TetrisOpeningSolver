@@ -81,6 +81,10 @@ class Board {
         console.log("\n");
     }
 
+    length(): number {
+        return this.grid.length;
+    }
+
     getBoard(): string {
         return [...this.grid].reverse().map(row => row.map(cell => cell || "0").join(" ")).join("\n");
     }
@@ -92,18 +96,19 @@ class Board {
 
     findLowestEmptyRow(piece: PieceType, Xposition: number): number {
         const shape = PIECES[piece];
-        for (let y = 19; y >= 0; y--) {
+        const highestRow = 19 - Math.max(...shape.map(block => block.y));
+        for (let y = highestRow; y >= 0; y--) {
             let canPlace = true;
             for (const block of shape) {
                 const boardX = Xposition + block.x;
-                const boardY = y - block.y;
+                const boardY = y + block.y;
                 if (boardY < 0 || this.grid[boardY]![boardX] !== null) {
                     canPlace = false;
                     break;
                 }
             }
             if (!canPlace) {
-                return y;
+                return y + 1;
             }
         }
         return 0
@@ -113,12 +118,25 @@ class Board {
         if (!this.checkPlaceable(piece, position)) {
             throw new Error("Piece cannot be placed at the given position/index.");
         }
+        console.log(`Inserting ${piece} at pos ${position}`);
         const shape = PIECES[piece];
         const y = this.findLowestEmptyRow(piece, position);
         for (const block of shape) {
             const boardX = position + block.x;
-            const boardY = y - block.y;
+            const boardY = y + block.y;
             this.grid[boardY]![boardX] = piece;
+        }
+
+        this.clearLines(y);
+    }
+
+    clearLines(y: number): void {
+        for (let i = y; i < y + 4; i++) {
+            if (this.grid[i]!.every(elem => elem !== null)) {
+                console.log('Line cleared');
+                this.grid.splice(i, 1);
+                this.grid.push(Array<Cell>(10).fill(null));
+            }
         }
     }
 }
