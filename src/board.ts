@@ -78,6 +78,7 @@ class Board {
             [...this.grid].reverse().map(row => row.map(cell => cell || "0")
                 .join(" ")).join("\n")
         );
+        console.log("\n");
     }
 
     getBoard(): string {
@@ -89,23 +90,23 @@ class Board {
         return Xposition >= 0 && 10 >= Xposition + width;
     }
 
-    findLowestEmptyRow(Xposition: number, piece: PieceType): number {
+    findLowestEmptyRow(piece: PieceType, Xposition: number): number {
         const shape = PIECES[piece];
         for (let y = 19; y >= 0; y--) {
             let canPlace = true;
             for (const block of shape) {
                 const boardX = Xposition + block.x;
-                const boardY = y + block.y;
-                if (boardY >= 20 || this.grid[boardY]![boardX] !== null) {
+                const boardY = y - block.y;
+                if (boardY < 0 || this.grid[boardY]![boardX] !== null) {
                     canPlace = false;
                     break;
                 }
             }
-            if (canPlace) {
+            if (!canPlace) {
                 return y;
             }
         }
-        throw new Error("Piece cannot fit in this column.");
+        return 0
     }
 
     placePiece(piece: PieceType, position: number): void {
@@ -113,9 +114,12 @@ class Board {
             throw new Error("Piece cannot be placed at the given position/index.");
         }
         const shape = PIECES[piece];
-        const groundWidth = findPieceGroundWidth(piece);
-        const totalWidth = findPieceWidth(piece);
-
+        const y = this.findLowestEmptyRow(piece, position);
+        for (const block of shape) {
+            const boardX = position + block.x;
+            const boardY = y - block.y;
+            this.grid[boardY]![boardX] = piece;
+        }
     }
 }
 

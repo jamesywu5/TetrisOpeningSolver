@@ -1,35 +1,38 @@
-import {expect, it} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {Board} from '../src/board';
 
-it('should create a board', () => {
-    const board = new Board();
-    expect(board).toBeInstanceOf(Board);
-});
+describe('Board initialization', () => {
+    it('should create a board', () => {
+        const board = new Board();
+        expect(board).toBeInstanceOf(Board);
+    });
 
-it('board is empty and prints 0s', () => {
-    const board = new Board();
-    const boardString = board.getBoard();
-    expect(boardString).toEqual(
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0\n' +
-        '0 0 0 0 0 0 0 0 0 0')
+    it('board is empty and prints 0s', () => {
+        const board = new Board();
+        const boardString = board.getBoard();
+        expect(boardString).toEqual(
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0\n' +
+            '0 0 0 0 0 0 0 0 0 0')
+    });
+
 });
 
 it('check placeable for I piece at position 0', () => {
